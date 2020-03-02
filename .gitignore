@@ -27,6 +27,7 @@ hs_err_pid*
 
 # target programming
 */target
+/target
 
 # pom.xml
 */*.iml
