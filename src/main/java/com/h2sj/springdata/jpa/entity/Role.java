@@ -1,9 +1,11 @@
 package com.h2sj.springdata.jpa.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +26,15 @@ public class Role implements Serializable {
     @Column(name = "r_id")
     private Long rId;
 
+    @NotEmpty(message = "r_name字段不为空")
     @Column(name = "r_name")
     private String rName;
 
+    @JSONField(serialize = false)
     @OneToMany(targetEntity = Member.class,mappedBy = "role")
     private List<Member> members = new ArrayList<>();
 
+    @JSONField(serialize = false)
     @ManyToMany(targetEntity = Permission.class)
     @JoinTable(
             name = "db_role_to_permission",
